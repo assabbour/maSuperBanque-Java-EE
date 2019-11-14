@@ -4,7 +4,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>SpringBnb</title>
+<title>Ma Super Banque !</title>
 <link rel="stylesheet" href="style.css">
 
 <link rel="stylesheet"
@@ -111,7 +111,38 @@
   </div>
   <div class="card-body text-center">
     
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	<form th:action="@{/saveOperation}" method="post">
+		<div>
+			<label>Compte</label>
+			<input type="hidden" name="codeCompte" th:value="${codeCompte}" />
+			<label th:text="${codeCompte}"></label>
+		</div>
+		<div>
+			<input type="radio" name="typeOperation" value="VERS" checked="checked" 
+			onchange="document.getElementById('forVirement').style.display='none'"/>
+			<label>Versement</label>
+			<input type="radio" name="typeOperation" value="RET" 
+			onchange="document.getElementById('forVirement').style.display='none'"/>
+			<label>Retrait</label>
+			<input type="radio" name="typeOperation" value="VIR" 
+			onchange="document.getElementById('forVirement').style.display='block'"/>
+			<label>Virement</label>
+		</div>
+		
+		<div id="forVirement" style="display:none">
+		<label>Vers</label>
+		<input type="text" name="codeCompte2" />
+		</div>
+		<div>
+		<label>Montant</label>
+		<input type="text" name="montant" />
+		
+		</div>
+		<button class="btn btn-info" type="submit"> Save !</button>
+		
+	</form>
+
+
   </div>
 </div>
 
