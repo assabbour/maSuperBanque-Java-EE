@@ -1,0 +1,169 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>SpringBnb</title>
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="script.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">MaSuperBanque</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/operation}">Operations <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/comptes}">Comptes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/clients}">Clients</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+<div class="row">
+
+
+<div class="col-md-6 "> 
+
+<div class="card m-4">
+  <div class="card-header text-center">
+    <h5 class="card-title text-info">Consultation d'un compte </h5>
+  </div>
+  <div class="card-body text-center">
+    <form th:action="@{/consultercompte}" method="get">
+    	<div>
+    	<label>Code compte</label>
+    	<input type="text" name="codeCompte"/>
+    	<button type="text" class="btn btn-primary" >Ok</button>
+    	</div>
+    </form>
+    <div class="bg-warning" th:if="${exception}" th:text="${exception.message}"></div>
+  </div>
+</div>
+
+
+<div class="card m-4">
+  <div class="card-header text-center">
+    <h5 class="card-title text-info"> Information sur le compte</h5>
+  </div>
+  <div class="card-body text-center" th:if="${compte}">
+    
+    
+    			<!--<div>
+					<label>Code : </label> <label th:text="${compte.code_compte}"> </label>
+				</div>
+				<div>
+					<label>Date creation : </label> <label
+						th:text="${compte.date_creation}"> </label>
+				</div>
+				<div th:if="${compte.class.simpleName=='CompteCourant'}">
+					<label>Date creation : </label> <label
+						th:text="${compte.type_cpte}"> </label>
+				</div>-->
+				<div>
+					<label>Client : </label> <label th:text="${compte.client.nom}"> </label>
+				</div>
+				<div>
+					<label>Solde : </label> <label th:text="${compte.solde}"> </label>
+				</div>
+				
+				 
+    
+    
+    
+  </div>
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="col-md-6">
+
+
+<div class="card m-4">
+  <div class="card-header text-center">
+    <h5 class="card-title text-info">Operation sur le compte</h5>
+  </div>
+  <div class="card-body text-center">
+    
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div>
+
+
+
+<div class="card m-4">
+  <div class="card-header text-center" th:if="${compte}">
+    <h5 class="card-title text-info"> List des operations</h5>
+  </div>
+  <div class="card-body text-center">
+    
+
+	<table class="table table-striped">
+		<tr>
+			<th>Num</th><th>Type</th><th>Date</th><th>Montant</th>
+		</tr>
+		<tr th:each="o:${listOperations}">
+			<td th:text="${o.numero}"></td><td th:text="${o.class.simpleName}"></td><td th:text="${o.dateOperation}"></td><td th:text="${o.montant}">Date</td>
+		</tr>
+	</table>    
+
+
+
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+<footer>
+	<div class="navbar fixed-bottom text-center">
+		<small> L'adresse de vootre banque : </small>
+	</div>
+</footer>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
